@@ -1,0 +1,19 @@
+replicaCount: 1
+
+fullnameOverride: leader
+
+autoscaling:
+  enabled: true
+
+config:
+  scName: standard-rwo
+  license:
+  token:
+  adminPassword: admin
+  criblHome: /opt/cribl
+  bindHost: 0.0.0.0
+  rejectSelfSignedCerts: 0
+
+service:
+  internalType: ClusterIP
+  externalType: NodePort

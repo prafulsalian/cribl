@@ -1,0 +1,63 @@
+formatter: "markdown table"
+
+version: ""
+
+header-from: main.tf
+footer-from: ""
+
+recursive:
+  enabled: false
+
+content: |-
+
+  # Terraform Configuration
+
+  [[_TOC_]]
+
+  ## Overview
+
+  This Terraform configuration is used to,
+  - Setup GCS (Google Cloud Storage) as the backend for storing the Terraform state files for Cribl infratructure.
+  - Setup a Service Account and IAM role and bindings to allow the Service Account to be used to provision Cribl infrastructure.
+
+
+  ## Configuration
+
+  {{ .Requirements }}
+
+  {{ .Providers }}
+
+  {{ .Inputs }}
+
+  {{ .Resources }}
+
+  {{ .Outputs }}
+
+output:
+  file: README.md
+  mode: replace
+  template: |-
+    {{ .Content }}
+
+output-values:
+  enabled: false
+  from: ""
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: true
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: false
+  html: true
+  indent: 2
+  lockfile: false
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true
