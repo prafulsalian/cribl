@@ -1,0 +1,64 @@
+replicaCount: 3
+
+fullnameOverride: worker
+
+config:
+  host: leader-internal
+  rejectSelfSignedCerts: 0
+  tlsLeader:
+    enable: false
+
+autoscaling:
+  minReplicas: 3
+  maxReplicas: 12
+  targetCPUUtilizationPercentage: 90
+  targetMemoryUtilizationPercentage: 90
+
+service:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerSourceRanges:
+  - "0.0.0.0/0"
+  annotations:
+    cloud.google.com/l4-rbs: "enabled"
+    cloud.google.com/network-tier: "Standard"
+  ports:
+  - name: tcpjson
+    port: 10001
+    protocol: TCP
+  - name: s2s
+    port: 9997
+    protocol: TCP
+  - name: http
+    port: 10080
+    protocol: TCP
+  - name: https
+    port: 10081
+    protocol: TCP
+  - name: syslog
+    port: 5140
+    protocol: TCP
+  - name: metrics
+    port: 8125
+    protocol: TCP
+  - name: elastic
+    port: 9200
+    protocol: TCP
+  - name: hec
+    port: 8088
+    protocol: TCP
+  - name: criblhttp
+    port: 10200
+    protocol: TCP
+  - name: cribltcp
+    port: 10300
+    protocol: TCP
+  - name: custom1
+    port: 20000
+    protocol: TCP
+  - name: custom2
+    port: 20001
+    protocol: TCP
+  - name: custom3
+    port: 20002
+    protocol: TCP

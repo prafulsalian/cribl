@@ -2,18 +2,25 @@ replicaCount: 1
 
 fullnameOverride: leader
 
-autoscaling:
-  enabled: true
-
 config:
   scName: standard-rwo
   license:
   token:
   adminPassword: admin
-  criblHome: /opt/cribl
-  bindHost: 0.0.0.0
   rejectSelfSignedCerts: 0
 
 service:
   internalType: ClusterIP
-  externalType: NodePort
+  externalType: LoadBalancer
+  annotations:
+    cloud.google.com/l4-rbs: "enabled"
+    cloud.google.com/network-tier: "Standard"
+  ports:
+  - name: api
+    port: 9000
+    protocol: TCP
+    external: true
+  - name: leadercomm
+    port: 4200
+    protocol: TCP
+    external: true
